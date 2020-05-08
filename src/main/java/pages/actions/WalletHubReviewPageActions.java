@@ -36,20 +36,20 @@ public class WalletHubReviewPageActions {
 		
 			
 			WebDriver driver = SeleniumDriver.getDriver();
+			WebDriverWait wait = new WebDriverWait(driver, 30); 
+			
 			
 			driver.findElement(By.xpath("//span[@class='nav-txt'][contains(text(),'Reviews')]")).click();
 
 			List<WebElement> stars = driver
 					.findElements(By.xpath("//*[@class='rvs-svg']//*[@class='rvs-star-svg']"));
-			WebDriverWait wait = new WebDriverWait(driver, 50); 
 			
 			Actions action = new Actions(driver);
 			
 			action.moveToElement(wait.until(ExpectedConditions.visibilityOf(stars.get(5)))).build().perform();
 			
-			WebElement RatingStar = driver
-					.findElement(By.xpath("//review-star[@class='rvs-svg']//*[local-name()='svg'][4]"));
-			action.click(RatingStar).build().perform();
+			WebElement Star = driver.findElement(By.xpath("//review-star[@class='rvs-svg']//*[local-name()='svg'][4]"));
+			action.click(Star).build().perform();
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='dropdown second']"))).click();
 			driver.findElement(By.xpath("//li[contains(text(),'Health Insurance')]")).click();
 			driver.findElement(By.xpath("//textarea[contains(@placeholder,'Write your review')]")).sendKeys(
@@ -71,11 +71,10 @@ public class WalletHubReviewPageActions {
         String Actual = successmessage.getText();
         String Expected = "Your review has been posted.";
         Assert.assertEquals(Actual, Expected);
-		WebElement p= driver.findElement(By.xpath("//div[@class='brgm-button brgm-user brgm-list-box']/span[@class ='brgm-list-title']"));//go to profile
-		action.moveToElement(p).build().perform();
+		WebElement profile= driver.findElement(By.xpath("//div[@class='brgm-button brgm-user brgm-list-box']/span[@class ='brgm-list-title']"));
+		action.moveToElement(profile).build().perform();
 		action.moveToElement(driver.findElement(By.xpath("//a[@class='brgm-list-it'][contains(text(),'Profile')]"))).click().build().perform();
        String Act= driver.findElement(By.xpath("//a[contains(text(),'"+reviewTitle+"')]")).getText();
-       //validate the review is udpated
        String Exp = reviewTitle;
        Assert.assertEquals(Act, Exp);
 	}
