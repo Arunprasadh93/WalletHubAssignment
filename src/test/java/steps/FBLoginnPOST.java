@@ -28,9 +28,10 @@ public class FBLoginnPOST {
 	public void launchandLogin() throws InterruptedException {
 		FBLoginPageActions fblogin = new FBLoginPageActions();
 		FBHomePageActions fbhomePageactions = new FBHomePageActions();
-		
+		String username = "arunprasadh.sj@gmail.com";
+		String password = "XXXX";
 		SeleniumDriver.openPage("https://www.facebook.com");
-		fblogin.loginFB("arunprasadh.sj@gmail.com", "chelseamay2020");
+		fblogin.loginFB(username, password);
 		fbhomePageactions.postFB("Hellow World!");
 	}
 	
